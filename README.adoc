@@ -1,0 +1,122 @@
+= sloth-protocol - Open Source IM protocol
+Andrey Antukh, <niwi@niwi.be>
+:toc: left
+:numbered:
+:icons: font
+:source-highlighter: pygments
+:pygments-style: friendly
+:sectlinks:
+:stylesheet: styles.css
+:imagesdir: ./images
+:iconsdir: ./images
+
+Open Source IM protocol highly inspired by xmpp and hangout.
+
+== Introduction
+
+TODO
+
+
+== Rationale
+
+TODO
+
+
+== Addressing Scheme
+
+An entity is anything that can be considered a network endpoint and that can communicate using sloth
+protocol. All such entities are uniquelly adressable using URI format.
+
+This is a valid list of possible entity identifiers:
+
+* `sloth://username@domain.com`
+* `username@domain.com`
+
+An entity (like in smtp protocol) belongs to one domain / domain provider. Different domains can
+hold entities with same node identifier. The node identifier is a string placed before the domain
+identifier and separated from the latter by the `@`.
+
+== Transport
+
+=== Overview
+
+The protocol is based complely in asynchronous message based communication. And it has special
+focus on *WebSockets* as default and recommended transport protocol. Any other protocol that fulfill
+the same or similar semantics is algo a good candidade for transport protocol.
+
+The intention of sloth protocol is to be completely web ready, therefore the decision of use
+*WebSockets* as default and recommended transport protocol. But in other environments with full
+support for tcp connectivity *zeromq* and/or *nanomsg* would be a great alternative.
+
+=== Messages Stream
+
+The message is consists in a simple key value structure. The sloth protocol has one mandatory format:
+*json*. But other formats should also to be supported and used with content negotiation.
+
+.A list of a recommeded formats that sloth compliant serves can implement.
+[options="header", cols="1,1,3"]
+|=======================================
+| Name    | Observations | Link
+| json    | Mandatory    | http://www.ietf.org/rfc/rfc4627.txt
+| msgpack | Recommended  | http://msgpack.org/
+|=======================================
+
+=== Content Negotiation
+
+As, *WebSockets* is a default transport protocol, this section will explain a negotiation of message
+format using it as example.
+
+The negotiation of message format is carried out using query params part of websockets uri. This is
+a commonly known websocket format uris:
+
+* `ws://domain.com/resource?param=value`
+* `wss://domain.com/resource?param=value`
+
+The message format should be provided using `format` parameter on the websocket uri:
+
+* `ws//sloth.land/?format=msgpack`
+
+In case of server does not supports that format, it should close the connection inmediatelly and
+may send a message in a *json* format (the unique mandatory format).
+
+=== Connection initialization
+
+This is a simple diagram on how connection is established, and which messages are mandatory
+on that process.
+
+1. Create a new connection (server not sends nothing at this moment).
+2. Send a authentication message.
+3. Server responds with an message notifying if authentication has been successful or failed.
+4. In case of successful, client should sent its first status message.
+
+Additional notes:
+
+* Server can close the connection after arbitrary number of failed attempts of authentication
+  messages.
+
+=== Message types
+
+==== Message
+
+TODO
+
+==== Presence
+
+TODO
+
+==== IQ (Info/Query)
+
+TODO
+
+
+== Messages
+
+This section will explain and show examples about all supported messages.
+
+=== Overview
+
+TODO
+
+=== Authentication
+
+TODO
