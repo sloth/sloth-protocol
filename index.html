@@ -282,7 +282,7 @@ a:hover, a:focus { text-decoration: underline; }
 
 *:not(pre) > code { font-size: 0.86667em; font-style: normal !important; letter-spacing: 0; padding: 1px 5px 1px 5px; background-color: transparent; border: 1px solid #dddddd; -webkit-border-radius: 3px; border-radius: 3px; line-height: inherit; }
 
-pre, pre > code { line-height: 1.6; color: white; font-family: Consolas, "Liberation Mono", Courier, monospace; font-weight: normal; }
+pre, pre > code { line-height: 1.3; color: white; font-family: Consolas, "Liberation Mono", Courier, monospace; font-weight: normal; }
 
 .keyseq { color: #666666; }
 
@@ -398,7 +398,7 @@ table.tableblock #preamble > .sectionbody > .paragraph:first-of-type p { font-si
 .literalblock pre, .listingblock pre:not(.highlight), .listingblock pre[class="highlight"], .listingblock pre[class^="highlight "], .listingblock pre.CodeRay, .listingblock pre.prettyprint { background: #333333; }
 .sidebarblock .literalblock pre, .sidebarblock .listingblock pre:not(.highlight), .sidebarblock .listingblock pre[class="highlight"], .sidebarblock .listingblock pre[class^="highlight "], .sidebarblock .listingblock pre.CodeRay, .sidebarblock .listingblock pre.prettyprint { background: #f2f1f1; }
 
-.literalblock pre, .literalblock pre[class], .listingblock pre, .listingblock pre[class] { border: 2px solid #dddddd; -webkit-border-radius: 3px; border-radius: 3px; word-wrap: break-word; padding: 0.66667em; font-size: 0.86667em; }
+.literalblock pre, .literalblock pre[class], .listingblock pre, .listingblock pre[class] { word-wrap: break-word; padding: 0.66667em; font-size: 0.86667em; font-size: 12px; }
 .literalblock pre.nowrap, .literalblock pre[class].nowrap, .listingblock pre.nowrap, .listingblock pre[class].nowrap { overflow-x: auto; white-space: pre; word-wrap: normal; }
 @media only screen and (min-width: 768px) { .literalblock pre, .literalblock pre[class], .listingblock pre, .listingblock pre[class] { font-size: 0.96667em; } }
 @media only screen and (min-width: 1280px) { .literalblock pre, .literalblock pre[class], .listingblock pre, .listingblock pre[class] { font-size: 1.06667em; } }
@@ -700,73 +700,16 @@ h2 { color: #325D72; border-bottom: 1px solid #dddddd; }
 
 .literalblock pre, .listingblock pre { background: #333333; }
 
+
+.listingblock pre.highlightjs > code {
+    border-radius: 0px;
+    font-size: 12px;
+}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
-<style>
-.listingblock .pygments .hll { background-color: #ffffcc }
-.listingblock .pygments  { background: #f0f0f0; }
-.listingblock .pygments .tok-c { color: #60a0b0; font-style: italic } /* Comment */
-.listingblock .pygments .tok-err { border: 1px solid #FF0000 } /* Error */
-.listingblock .pygments .tok-k { color: #007020; font-weight: bold } /* Keyword */
-.listingblock .pygments .tok-o { color: #666666 } /* Operator */
-.listingblock .pygments .tok-cm { color: #60a0b0; font-style: italic } /* Comment.Multiline */
-.listingblock .pygments .tok-cp { color: #007020 } /* Comment.Preproc */
-.listingblock .pygments .tok-c1 { color: #60a0b0; font-style: italic } /* Comment.Single */
-.listingblock .pygments .tok-cs { color: #60a0b0; background-color: #fff0f0 } /* Comment.Special */
-.listingblock .pygments .tok-gd { color: #A00000 } /* Generic.Deleted */
-.listingblock .pygments .tok-ge { font-style: italic } /* Generic.Emph */
-.listingblock .pygments .tok-gr { color: #FF0000 } /* Generic.Error */
-.listingblock .pygments .tok-gh { color: #000080; font-weight: bold } /* Generic.Heading */
-.listingblock .pygments .tok-gi { color: #00A000 } /* Generic.Inserted */
-.listingblock .pygments .tok-go { color: #888888 } /* Generic.Output */
-.listingblock .pygments .tok-gp { color: #c65d09; font-weight: bold } /* Generic.Prompt */
-.listingblock .pygments .tok-gs { font-weight: bold } /* Generic.Strong */
-.listingblock .pygments .tok-gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-.listingblock .pygments .tok-gt { color: #0044DD } /* Generic.Traceback */
-.listingblock .pygments .tok-kc { color: #007020; font-weight: bold } /* Keyword.Constant */
-.listingblock .pygments .tok-kd { color: #007020; font-weight: bold } /* Keyword.Declaration */
-.listingblock .pygments .tok-kn { color: #007020; font-weight: bold } /* Keyword.Namespace */
-.listingblock .pygments .tok-kp { color: #007020 } /* Keyword.Pseudo */
-.listingblock .pygments .tok-kr { color: #007020; font-weight: bold } /* Keyword.Reserved */
-.listingblock .pygments .tok-kt { color: #902000 } /* Keyword.Type */
-.listingblock .pygments .tok-m { color: #40a070 } /* Literal.Number */
-.listingblock .pygments .tok-s { color: #4070a0 } /* Literal.String */
-.listingblock .pygments .tok-na { color: #4070a0 } /* Name.Attribute */
-.listingblock .pygments .tok-nb { color: #007020 } /* Name.Builtin */
-.listingblock .pygments .tok-nc { color: #0e84b5; font-weight: bold } /* Name.Class */
-.listingblock .pygments .tok-no { color: #60add5 } /* Name.Constant */
-.listingblock .pygments .tok-nd { color: #555555; font-weight: bold } /* Name.Decorator */
-.listingblock .pygments .tok-ni { color: #d55537; font-weight: bold } /* Name.Entity */
-.listingblock .pygments .tok-ne { color: #007020 } /* Name.Exception */
-.listingblock .pygments .tok-nf { color: #06287e } /* Name.Function */
-.listingblock .pygments .tok-nl { color: #002070; font-weight: bold } /* Name.Label */
-.listingblock .pygments .tok-nn { color: #0e84b5; font-weight: bold } /* Name.Namespace */
-.listingblock .pygments .tok-nt { color: #062873; font-weight: bold } /* Name.Tag */
-.listingblock .pygments .tok-nv { color: #bb60d5 } /* Name.Variable */
-.listingblock .pygments .tok-ow { color: #007020; font-weight: bold } /* Operator.Word */
-.listingblock .pygments .tok-w { color: #bbbbbb } /* Text.Whitespace */
-.listingblock .pygments .tok-mb { color: #40a070 } /* Literal.Number.Bin */
-.listingblock .pygments .tok-mf { color: #40a070 } /* Literal.Number.Float */
-.listingblock .pygments .tok-mh { color: #40a070 } /* Literal.Number.Hex */
-.listingblock .pygments .tok-mi { color: #40a070 } /* Literal.Number.Integer */
-.listingblock .pygments .tok-mo { color: #40a070 } /* Literal.Number.Oct */
-.listingblock .pygments .tok-sb { color: #4070a0 } /* Literal.String.Backtick */
-.listingblock .pygments .tok-sc { color: #4070a0 } /* Literal.String.Char */
-.listingblock .pygments .tok-sd { color: #4070a0; font-style: italic } /* Literal.String.Doc */
-.listingblock .pygments .tok-s2 { color: #4070a0 } /* Literal.String.Double */
-.listingblock .pygments .tok-se { color: #4070a0; font-weight: bold } /* Literal.String.Escape */
-.listingblock .pygments .tok-sh { color: #4070a0 } /* Literal.String.Heredoc */
-.listingblock .pygments .tok-si { color: #70a0d0; font-style: italic } /* Literal.String.Interpol */
-.listingblock .pygments .tok-sx { color: #c65d09 } /* Literal.String.Other */
-.listingblock .pygments .tok-sr { color: #235388 } /* Literal.String.Regex */
-.listingblock .pygments .tok-s1 { color: #4070a0 } /* Literal.String.Single */
-.listingblock .pygments .tok-ss { color: #517918 } /* Literal.String.Symbol */
-.listingblock .pygments .tok-bp { color: #007020 } /* Name.Builtin.Pseudo */
-.listingblock .pygments .tok-vc { color: #bb60d5 } /* Name.Variable.Class */
-.listingblock .pygments .tok-vg { color: #bb60d5 } /* Name.Variable.Global */
-.listingblock .pygments .tok-vi { color: #bb60d5 } /* Name.Variable.Instance */
-.listingblock .pygments .tok-il { color: #40a070 } /* Literal.Number.Integer.Long */
-</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
@@ -789,10 +732,11 @@ h2 { color: #325D72; border-bottom: 1px solid #dddddd; }
 <li><a href="#_message_types">4.5. Message types</a></li>
 </ul>
 </li>
-<li><a href="#_messages">5. Messages</a>
+<li><a href="#_authentication">5. Authentication</a></li>
+<li><a href="#_rooms">6. Rooms</a>
 <ul class="sectlevel2">
-<li><a href="#_overview_2">5.1. Overview</a></li>
-<li><a href="#_authentication">5.2. Authentication</a></li>
+<li><a href="#_create_room">6.1. Create room</a></li>
+<li><a href="#_list_rooms">6.2. List rooms</a></li>
 </ul>
 </li>
 </ul>
@@ -970,43 +914,178 @@ messages.</p>
 </div>
 <div class="sect2">
 <h3 id="_message_types"><a class="link" href="#_message_types">4.5. Message types</a></h3>
+<div class="paragraph">
+<p>An message consists in a simple structure like hash map, mainly without neesting. It has keys
+as string and values as string, number or list.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example of basic structure of an message.</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  "_type": "message:chat",
+  "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
+  "some": "thing"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The two mandatory entries are <strong>_type</strong> and <strong>_id</strong>. The type represents a message type in format
+<code>&lt;type&gt;:&lt;subtype&gt;[&lt;subsubtype&gt;]</code> and <strong>_id</strong> is a arbitrary unique identifier that serves for track
+the messages (very useful for <strong>iq</strong> messages).</p>
+</div>
+<div class="paragraph">
+<p>All entries that starts with <strong>_</strong> are reserved by sloth protocol or by its extensions.</p>
+</div>
 <div class="sect3">
 <h4 id="_message"><a class="link" href="#_message">4.5.1. Message</a></h4>
 <div class="paragraph">
-<p>TODO</p>
+<p>This is a type of message that a client can send or receive from server. Its purpose is transport
+arbitrary im messages.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_presence"><a class="link" href="#_presence">4.5.2. Presence</a></h4>
 <div class="paragraph">
-<p>TODO</p>
+<p>This is a type message that works like a broadcast to other users to tell them about your state.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_iq_info_query"><a class="link" href="#_iq_info_query">4.5.3. IQ (Info/Query)</a></h4>
 <div class="paragraph">
-<p>TODO</p>
+<p>Is a request response mechanism that works like http.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_messages"><a class="link" href="#_messages">5. Messages</a></h2>
+<h2 id="_authentication"><a class="link" href="#_authentication">5. Authentication</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section will explain and show examples about all supported messages.</p>
+<p>The authentication process of sloth protocol consist in very simple credential verification.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example of authentication packet request.</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  "username": "username",
+  "password": "password",
+  "domain": "sloth.land",
+  "_type": "iq:put:auth",
+  "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example of authentication packet successful response</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  "auth": "success",
+  "_type": "iq:result:auth",
+  "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example of authentication packet failed response</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  "auth": "fail",
+  "error" "Username, password or domain may be wrong.",
+  "error_code": "001",
+  "_type": "iq:result:auth",
+  "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rooms"><a class="link" href="#_rooms">6. Rooms</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This is a basic primitive of communication of sloth protocol. Unlike xmpp, sloth does not has
+explicit individual/private messages. Every communication will be done in a room.</p>
+</div>
+<div class="paragraph">
+<p>A room allows two or more person interchange messages.</p>
 </div>
 <div class="sect2">
-<h3 id="_overview_2"><a class="link" href="#_overview_2">5.1. Overview</a></h3>
+<h3 id="_create_room"><a class="link" href="#_create_room">6.1. Create room</a></h3>
 <div class="paragraph">
-<p>TODO</p>
+<p>For start a chat with someone you first need create a room. It should be done with <strong>iq</strong> message type.
+Let see an example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  "_type": "iq:create:room",
+  "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
+  "name": "myroom",
+  "participants": [
+    "person1@sloth.land",
+    "person2@sloth.land"
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+the domain part can be ommited and it is automatically resolved to current domain.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This request has two possible responses: <strong>success</strong> and <strong>fail</strong>.</p>
+</div>
+<div class="paragraph">
+<p>TODO: responses examples</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_authentication"><a class="link" href="#_authentication">5.2. Authentication</a></h3>
+<h3 id="_list_rooms"><a class="link" href="#_list_rooms">6.2. List rooms</a></h3>
 <div class="paragraph">
-<p>TODO</p>
+<p>You can request a list rooms to server. The server will return a list of owned rooms
+and rooms where you are participating:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  "_type": "iq:list:room",
+  "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This reques will return a response like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  "_type": "iq:result:room",
+  "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
+  "rooms": [
+    {
+       "id": "b0e59238-494c-41d5-b2c7-47af3872011b",
+       "name": "foo",
+       "created_at": "2015-01-25T01:45:48.428Z",
+       "modified_at": "2015-01-25T01:45:48.428Z",
+    },
+    {
+       "id": "b0e59238-494c-41d5-b2c7-47af3872012b",
+       "name": "bar",
+       "created_at": "2015-01-25T01:45:48.428Z",
+       "modified_at": "2015-01-25T01:45:48.428Z",
+    }
+  ]
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -1014,7 +1093,7 @@ messages.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-01-24 23:13:11 CET
+Last updated 2015-01-25 02:46:30 CET
 </div>
 </div>
 </body>

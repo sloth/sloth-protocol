@@ -3,8 +3,7 @@ Andrey Antukh, <niwi@niwi.be>
 :toc: left
 :numbered:
 :icons: font
-:source-highlighter: pygments
-:pygments-style: friendly
+:source-highlighter: highlightjs
 :sectlinks:
 :stylesheet: styles.css
 :imagesdir: ./images
@@ -96,27 +95,144 @@ Additional notes:
 
 === Message types
 
+An message consists in a simple structure like hash map, mainly without neesting. It has keys
+as string and values as string, number or list.
+
+.Example of basic structure of an message.
+[source, json]
+----
+{
+  "_type": "message:chat",
+  "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
+  "some": "thing"
+}
+----
+
+The two mandatory entries are *_type* and *_id*. The type represents a message type in format
+`<type>:<subtype>[<subsubtype>]` and *_id* is a arbitrary unique identifier that serves for track
+the messages (very useful for *iq* messages).
+
+All entries that starts with *_* are reserved by sloth protocol or by its extensions.
+
 ==== Message
 
-TODO
+This is a type of message that a client can send or receive from server. Its purpose is transport
+arbitrary im messages.
 
 ==== Presence
 
-TODO
+This is a type message that works like a broadcast to other users to tell them about your state.
 
 ==== IQ (Info/Query)
 
-TODO
+Is a request response mechanism that works like http.
 
 
-== Messages
+== Authentication
 
-This section will explain and show examples about all supported messages.
+The authentication process of sloth protocol consist in very simple credential verification.
 
-=== Overview
+.Example of authentication packet request.
+[source, json]
+----
+{
+  "username": "username",
+  "password": "password",
+  "domain": "sloth.land",
+  "_type": "iq:put:auth",
+  "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
+}
+----
 
-TODO
+.Example of authentication packet successful response
+[source, json]
+----
+{
+  "auth": "success",
+  "_type": "iq:result:auth",
+  "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
+}
+----
 
-=== Authentication
 
-TODO
+.Example of authentication packet failed response
+[source, json]
+----
+{
+  "auth": "fail",
+  "error" "Username, password or domain may be wrong.",
+  "error_code": "001",
+  "_type": "iq:result:auth",
+  "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
+}
+----
+
+
+== Rooms
+
+This is a basic primitive of communication of sloth protocol. Unlike xmpp, sloth does not has
+explicit individual/private messages. Every communication will be done in a room.
+
+A room allows two or more person interchange messages.
+
+=== Create room
+
+For start a chat with someone you first need create a room. It should be done with *iq* message type.
+Let see an example:
+
+[source,json]
+----
+{
+  "_type": "iq:create:room",
+  "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
+  "name": "myroom",
+  "participants": [
+    "person1@sloth.land",
+    "person2@sloth.land"
+  ]
+}
+----
+
+TIP: the domain part can be ommited and it is automatically resolved to current domain.
+
+This request has two possible responses: *success* and *fail*.
+
+TODO: responses examples
+
+
+=== List rooms
+
+You can request a list rooms to server. The server will return a list of owned rooms
+and rooms where you are participating:
+
+[source,json]
+----
+{
+  "_type": "iq:list:room",
+  "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
+}
+----
+
+This reques will return a response like this:
+
+[source,json]
+----
+{
+  "_type": "iq:result:room",
+  "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
+  "rooms": [
+    {
+       "id": "b0e59238-494c-41d5-b2c7-47af3872011b",
+       "name": "foo",
+       "created_at": "2015-01-25T01:45:48.428Z",
+       "modified_at": "2015-01-25T01:45:48.428Z",
+    },
+    {
+       "id": "b0e59238-494c-41d5-b2c7-47af3872012b",
+       "name": "bar",
+       "created_at": "2015-01-25T01:45:48.428Z",
+       "modified_at": "2015-01-25T01:45:48.428Z",
+    }
+  ]
+}
+----

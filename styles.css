@@ -272,7 +272,7 @@ a:hover, a:focus { text-decoration: underline; }
 
 *:not(pre) > code { font-size: 0.86667em; font-style: normal !important; letter-spacing: 0; padding: 1px 5px 1px 5px; background-color: transparent; border: 1px solid #dddddd; -webkit-border-radius: 3px; border-radius: 3px; line-height: inherit; }
 
-pre, pre > code { line-height: 1.6; color: white; font-family: Consolas, "Liberation Mono", Courier, monospace; font-weight: normal; }
+pre, pre > code { line-height: 1.3; color: white; font-family: Consolas, "Liberation Mono", Courier, monospace; font-weight: normal; }
 
 .keyseq { color: #666666; }
 
@@ -388,7 +388,7 @@ table.tableblock #preamble > .sectionbody > .paragraph:first-of-type p { font-si
 .literalblock pre, .listingblock pre:not(.highlight), .listingblock pre[class="highlight"], .listingblock pre[class^="highlight "], .listingblock pre.CodeRay, .listingblock pre.prettyprint { background: #333333; }
 .sidebarblock .literalblock pre, .sidebarblock .listingblock pre:not(.highlight), .sidebarblock .listingblock pre[class="highlight"], .sidebarblock .listingblock pre[class^="highlight "], .sidebarblock .listingblock pre.CodeRay, .sidebarblock .listingblock pre.prettyprint { background: #f2f1f1; }
 
-.literalblock pre, .literalblock pre[class], .listingblock pre, .listingblock pre[class] { border: 2px solid #dddddd; -webkit-border-radius: 3px; border-radius: 3px; word-wrap: break-word; padding: 0.66667em; font-size: 0.86667em; }
+.literalblock pre, .literalblock pre[class], .listingblock pre, .listingblock pre[class] { word-wrap: break-word; padding: 0.66667em; font-size: 0.86667em; font-size: 12px; }
 .literalblock pre.nowrap, .literalblock pre[class].nowrap, .listingblock pre.nowrap, .listingblock pre[class].nowrap { overflow-x: auto; white-space: pre; word-wrap: normal; }
 @media only screen and (min-width: 768px) { .literalblock pre, .literalblock pre[class], .listingblock pre, .listingblock pre[class] { font-size: 0.96667em; } }
 @media only screen and (min-width: 1280px) { .literalblock pre, .literalblock pre[class], .listingblock pre, .listingblock pre[class] { font-size: 1.06667em; } }
@@ -689,3 +689,9 @@ h2 { color: #325D72; border-bottom: 1px solid #dddddd; }
 .sidebarblock > .content > .title { margin-top: -20px; margin-right: -20px; margin-left: -20px; margin-bottom: 20px; padding: 1em; font-size: 0.8em; background: #eaeaea; }
 
 .literalblock pre, .listingblock pre { background: #333333; }
+
+
+.listingblock pre.highlightjs > code {
+    border-radius: 0px;
+    font-size: 12px;
+}
