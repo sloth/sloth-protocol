@@ -119,10 +119,6 @@ All entries that starts with *_* are reserved by sloth protocol or by its extens
 This is a type of message that a client can send or receive from server. Its purpose is transport
 arbitrary im messages.
 
-==== Presence
-
-This is a type message that works like a broadcast to other users to tell them about your state.
-
 ==== IQ (Info/Query)
 
 Is a request response mechanism that works like http.
@@ -144,24 +140,24 @@ The authentication process of sloth protocol consist in very simple credential v
 }
 ----
 
-.Example of authentication packet successful response
+.Example of authentication packet successful response.
 [source, json]
 ----
 {
-  "auth": "success",
-  "_type": "iq:result:auth",
+  "_status": "success",
+  "_type": "iq:put:result",
   "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
 }
 ----
 
 
-.Example of authentication packet failed response
+.Example of authentication packet failed response.
 [source, json]
 ----
 {
-  "auth": "fail",
-  "error" "Username, password or domain may be wrong.",
-  "error_code": "001",
+  "_status": "error",
+  "_message": "Username, password or domain may be wrong.",
+  "_code": "001",
   "_type": "iq:result:auth",
   "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
 }
@@ -208,7 +204,7 @@ and rooms where you are participating:
 [source,json]
 ----
 {
-  "_type": "iq:list:room",
+  "_type": "iq:info:room",
   "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
 }
 ----
@@ -218,8 +214,9 @@ This reques will return a response like this:
 [source,json]
 ----
 {
-  "_type": "iq:result:room",
+  "_type": "iq:info:result",
   "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
+  "_status": "success",
   "rooms": [
     {
        "id": "b0e59238-494c-41d5-b2c7-47af3872011b",
@@ -232,6 +229,49 @@ This reques will return a response like this:
        "name": "bar",
        "created_at": "2015-01-25T01:45:48.428Z",
        "modified_at": "2015-01-25T01:45:48.428Z",
+    }
+  ]
+}
+----
+
+=== Room information
+
+Is an IQ request for obtain a detailled information about one concrete room. It is a way for obtain
+a initial state of participants.
+
+.Example of request room information
+[source,json]
+----
+{
+  "_type": "iq:info:room",
+  "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
+  "id": "b0e59238-494c-41d5-b2c7-47af3872012b",
+}
+----
+
+.Example of successful
+[source,json]
+----
+{
+  "_type": "iq:info:result",
+  "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
+  "_status": "success",
+  "name": "foo",
+  "created_at": "2015-01-25T01:45:48.428Z",
+  "modified_at": "2015-01-25T01:45:48.428Z",
+  "owner": "person1@sloth.land",
+  "participants": [
+    {
+      "id": "person1@sloth.land",
+      "state": "available",
+      "state_message": "",
+      "last_update": "2015-01-25T01:45:48.428Z",
+    },
+    {
+      "id": "person2@sloth.land",
+      "state": "notavailable",
+      "state_message": "",
+      "last_update": "2015-01-25T01:45:48.428Z",
     }
   ]
 }

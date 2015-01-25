@@ -737,6 +737,7 @@ h2 { color: #325D72; border-bottom: 1px solid #dddddd; }
 <ul class="sectlevel2">
 <li><a href="#_create_room">6.1. Create room</a></li>
 <li><a href="#_list_rooms">6.2. List rooms</a></li>
+<li><a href="#_room_information">6.3. Room information</a></li>
 </ul>
 </li>
 </ul>
@@ -944,13 +945,7 @@ arbitrary im messages.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_presence"><a class="link" href="#_presence">4.5.2. Presence</a></h4>
-<div class="paragraph">
-<p>This is a type message that works like a broadcast to other users to tell them about your state.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_iq_info_query"><a class="link" href="#_iq_info_query">4.5.3. IQ (Info/Query)</a></h4>
+<h4 id="_iq_info_query"><a class="link" href="#_iq_info_query">4.5.2. IQ (Info/Query)</a></h4>
 <div class="paragraph">
 <p>Is a request response mechanism that works like http.</p>
 </div>
@@ -977,22 +972,22 @@ arbitrary im messages.</p>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example of authentication packet successful response</div>
+<div class="title">Example of authentication packet successful response.</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
-  "auth": "success",
-  "_type": "iq:result:auth",
+  "_status": "success",
+  "_type": "iq:put:result",
   "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
 }</code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example of authentication packet failed response</div>
+<div class="title">Example of authentication packet failed response.</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
-  "auth": "fail",
-  "error" "Username, password or domain may be wrong.",
-  "error_code": "001",
+  "_status": "error",
+  "_message": "Username, password or domain may be wrong.",
+  "_code": "001",
   "_type": "iq:result:auth",
   "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
 }</code></pre>
@@ -1057,7 +1052,7 @@ and rooms where you are participating:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
-  "_type": "iq:list:room",
+  "_type": "iq:info:room",
   "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
 }</code></pre>
 </div>
@@ -1068,8 +1063,9 @@ and rooms where you are participating:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
-  "_type": "iq:result:room",
+  "_type": "iq:info:result",
   "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
+  "_status": "success",
   "rooms": [
     {
        "id": "b0e59238-494c-41d5-b2c7-47af3872011b",
@@ -1088,12 +1084,57 @@ and rooms where you are participating:</p>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_room_information"><a class="link" href="#_room_information">6.3. Room information</a></h3>
+<div class="paragraph">
+<p>Is an IQ request for obtain a detailled information about one concrete room. It is a way for obtain
+a initial state of participants.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example of request room information</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  "_type": "iq:info:room",
+  "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
+  "id": "b0e59238-494c-41d5-b2c7-47af3872012b",
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example of successful</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+  "_type": "iq:info:result",
+  "_id": "b0e59238-494c-41d5-b2c7-47af3872010b",
+  "_status": "success",
+  "name": "foo",
+  "created_at": "2015-01-25T01:45:48.428Z",
+  "modified_at": "2015-01-25T01:45:48.428Z",
+  "owner": "person1@sloth.land",
+  "participants": [
+    {
+      "id": "person1@sloth.land",
+      "state": "available",
+      "state_message": "",
+      "last_update": "2015-01-25T01:45:48.428Z",
+    },
+    {
+      "id": "person2@sloth.land",
+      "state": "notavailable",
+      "state_message": "",
+      "last_update": "2015-01-25T01:45:48.428Z",
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-01-25 02:46:30 CET
+Last updated 2015-01-25 12:15:54 CET
 </div>
 </div>
 </body>
